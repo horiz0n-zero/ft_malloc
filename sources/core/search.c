@@ -1,5 +1,23 @@
 #include "libftmalloc.h"
 
+static inline void		*set_alloc(union u_allocation *alloc, uint8_t *mem, uint8_t *const end, const size_t size)
+{
+	if (!alloc->value.isfree)
+	{
+		alloc->value.next = (uint64_t)size;
+		if ((mem + size + sizeof(union u_allocation)) < end)
+		{
+			alloc = (union u_allocation*)(mem + size);
+			alloc->raw = 0;
+		}
+	}
+	else
+		alloc->value.isfree = 0;
+	while (((uint64_t)mem % ALIGNMENT))
+		mem++;
+	return (mem);
+}
+
 void					*zone_search(struct s_zone *const zone, size_t size)
 {
 	union u_allocation	*alloc;
@@ -11,31 +29,13 @@ void					*zone_search(struct s_zone *const zone, size_t size)
 	while (mem < end_zone)
 	{
 		if (!alloc->value.next && (end_zone - mem) >= size)
-		{
-			alloc->value.next = (uint64_t)size;
-			if ((end_zone - (mem + size)) >= size)
-			{
-				alloc = (union u_allocation*)(mem + size);
-				alloc->raw = 0;
-			}
-			while (((uint64_t)mem % ALIGNMENT))
-				mem++;
-			return (mem);
-		}
+			return (set_alloc(alloc, mem, end_zone, size));
 		else if (alloc->value.isfree && alloc->value.next <= size)
-		{
-			alloc->value.next = (uint64_t)size;
-			alloc->value.isfree = 0;
-			alloc = (union u_allocation*)(mem + size);
-			alloc->raw = 0;
-			while (((uint64_t)mem % ALIGNMENT))
-				mem++;
-			return (mem);
-		}
+			return (set_alloc(alloc, mem, end_zone, size));
 		else
 		{
 			alloc = (union u_allocation*)(mem += alloc->value.next);
-			mem += sizeof(union u_allocation); // optionel ??
+			mem += sizeof(union u_allocation);
 		}
 	}
 	return (NULL);

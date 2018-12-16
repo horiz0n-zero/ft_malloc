@@ -42,7 +42,7 @@ inline struct s_zone			*find_zone(struct s_malloc *const node, void *const ptr)
 	{
 		if (ptr > (void*)zone)
 			return (zone);
-		zone = zone->next;
+		zone = zone->prev;
 	}
 	return (NULL);
 }
