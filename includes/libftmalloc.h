@@ -82,6 +82,7 @@ extern void					exit_realloc_unallocated(void *const ptr);
 extern void					*enomem_error(void);
 
 extern void					libftmalloc_memset(uint8_t *ptr, size_t size);
+extern void					libftmalloc_memmove(uint8_t *dst, const uint8_t *src, size_t size);
 
 void						show_alloc_mem(void);
 

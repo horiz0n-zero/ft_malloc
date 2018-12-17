@@ -37,7 +37,8 @@ inline struct s_zone			*find_zone(struct s_malloc *const node, void *const ptr)
 			zone = zone->next;
 		}
 	}
-	zone = node->pages->current->prev;
+	if (node->pages->current)
+		zone = node->pages->current->prev;
 	while (zone)
 	{
 		if (ptr > (void*)zone)

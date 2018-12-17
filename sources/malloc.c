@@ -4,7 +4,6 @@ inline struct s_zone			*request_zone(struct s_malloc *const node, size_t size)
 {
 	struct s_zone				*zone;
 	union u_allocation			*alloc;
-//	const size_t				ori_size = size;
 
 	if (!node->pages->pagesize)
 	{
@@ -20,7 +19,6 @@ inline struct s_zone			*request_zone(struct s_malloc *const node, size_t size)
 	zone->size = size;
 	alloc = (union u_allocation*)(zone + 1);
 	alloc->raw = 0;
-	//alloc->value.next = (uint64_t)ori_size;
 	return (zone);
 }
 
