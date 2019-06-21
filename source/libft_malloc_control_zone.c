@@ -1,20 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc_functions.h                           :+:      :+:    :+:   */
+/*   libft_malloc_control_zone.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afeuerst <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 14:33:38 by afeuerst          #+#    #+#             */
-/*   Updated: 2019/05/16 09:32:42 by afeuerst         ###   ########.fr       */
+/*   Created: 2019/05/13 11:54:33 by afeuerst          #+#    #+#             */
+/*   Updated: 2019/05/13 11:55:39 by afeuerst         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_FUNCTIONS_H
-# define LIBFT_MALLOC_FUNCTIONS_H
+#include "libft_malloc_control_zone.h"
 
-# include "libft_malloc.h"
 
-void	libft_malloc_initializer(void) __attribute__((visibility("hidden")));
-
-#endif
